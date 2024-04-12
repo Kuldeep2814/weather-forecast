@@ -1,4 +1,4 @@
-/* styles.css */
+/* CityTable.css */
 
 /* CityTableWrapper styles */
 .CityTableWrapper {
@@ -6,11 +6,14 @@
   max-width: 800px;
   margin: 0 auto;
   padding: 20px;
+  background-color: #f2f2f2; /* Light gray background */
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 /* Search input styles */
 input[type="text"] {
-  width: 100%;
+  width: calc(100% - 24px); /* Adjusted input width */
   padding: 10px;
   margin-bottom: 20px;
   border: 1px solid #ccc;
@@ -22,6 +25,7 @@ table {
   width: 100%;
   border-collapse: collapse;
   background-color: #f9f9f9;
+  border-radius: 10px;
 }
 
 th,
@@ -32,7 +36,8 @@ td {
 }
 
 th {
-  background-color: #f2f2f2;
+  background-color: #4ca1af; /* Light blue background for table header */
+  color: white; /* White text color for table header */
   font-weight: bold;
 }
 

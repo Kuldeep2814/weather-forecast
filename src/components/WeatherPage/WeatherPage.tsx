@@ -83,13 +83,9 @@
 
 // export default WeatherPage;
 import React, { useState, useEffect } from "react";
-import styled from "styled-components";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import "./WeatherPageStyles.css"; // Import the CSS file
-
-const WeatherPageWrapper = styled.div`
-  /* Add any additional styled-components styles here if needed */
-`;
+import "leaflet/dist/leaflet.css";
 
 const WeatherPage: React.FC = () => {
   const [weatherData, setWeatherData] = useState<any | null>(null);
@@ -121,11 +117,11 @@ const WeatherPage: React.FC = () => {
   };
 
   return (
-    <WeatherPageWrapper className="WeatherPageWrapper">
+    <div className="WeatherPageWrapper">
       {loading ? (
         <p>Loading...</p>
       ) : weatherData ? (
-        <div>
+        <div className="WeatherCard">
           <h2>
             {weatherData.name}, {weatherData.sys.country}
           </h2>
@@ -141,27 +137,31 @@ const WeatherPage: React.FC = () => {
           <button onClick={() => handleUnitChange("imperial")}>
             Fahrenheit
           </button>
-          <MapContainer
-            center={[weatherData.coord.lat, weatherData.coord.lon]}
-            zoom={13}
-            style={{ width: "100%", height: "100%" }}
-            className="MapContainer"
-          >
-            <TileLayer
-              url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-              attribution='&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-            />
-            <Marker position={[weatherData.coord.lat, weatherData.coord.lon]}>
-              <Popup position={[weatherData.coord.lat, weatherData.coord.lon]}>
-                {weatherData.name}, {weatherData.sys.country}
-              </Popup>
-            </Marker>
-          </MapContainer>
+          <div className="MapWrapper">
+            <MapContainer
+              center={[weatherData.coord.lat, weatherData.coord.lon]}
+              zoom={13}
+              style={{ width: "100%", height: "100%" }}
+              className="MapContainer"
+            >
+              <TileLayer
+                url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                attribution='&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+              />
+              <Marker position={[weatherData.coord.lat, weatherData.coord.lon]}>
+                <Popup
+                  position={[weatherData.coord.lat, weatherData.coord.lon]}
+                >
+                  {weatherData.name}, {weatherData.sys.country}
+                </Popup>
+              </Marker>
+            </MapContainer>
+          </div>
         </div>
       ) : (
         <p>Failed to fetch weather data</p>
       )}
-    </WeatherPageWrapper>
+    </div>
   );
 };
 
