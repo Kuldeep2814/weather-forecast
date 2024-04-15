@@ -147,19 +147,31 @@ const CityTable: React.FC = () => {
     }
   };
 
-  const handleScroll = () => {
-    const { scrollTop, clientHeight, scrollHeight } = document.documentElement;
-    if (scrollHeight - scrollTop === clientHeight && !loading) {
-      setPage((prevPage) => prevPage + 1);
-    }
-  };
-
   useEffect(() => {
+    const handleScroll = () => {
+      const { scrollTop, clientHeight, scrollHeight } =
+        document.documentElement;
+      if (scrollHeight - scrollTop === clientHeight && !loading) {
+        setPage((prevPage) => prevPage + 1);
+      }
+    };
+
+    const handleTouchMove = () => {
+      const { scrollTop, clientHeight, scrollHeight } =
+        document.documentElement;
+      if (scrollHeight - scrollTop === clientHeight && !loading) {
+        setPage((prevPage) => prevPage + 1);
+      }
+    };
+
     window.addEventListener("scroll", handleScroll);
+    window.addEventListener("touchmove", handleTouchMove);
+
     return () => {
       window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("touchmove", handleTouchMove);
     };
-  }, []);
+  }, [loading]);
 
   useEffect(() => {
     localStorage.setItem("favorites", JSON.stringify(favorites));
