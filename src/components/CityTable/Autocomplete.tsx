@@ -1,5 +1,3 @@
-// Autocomplete.tsx
-
 import React, { useState } from "react";
 
 interface AutocompleteProps {
@@ -15,19 +13,16 @@ const Autocomplete: React.FC<AutocompleteProps> = ({
 }) => {
   const [filteredSuggestions, setFilteredSuggestions] = useState<string[]>([]);
 
-  // Function to handle input change
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const inputValue = event.target.value;
     onChange(inputValue);
 
-    // Filter suggestions based on input value
     const filtered = suggestions.filter((suggestion) =>
       suggestion.toLowerCase().includes(inputValue.toLowerCase())
     );
     setFilteredSuggestions(filtered);
   };
 
-  // Function to handle suggestion selection
   const handleSelectSuggestion = (suggestion: string) => {
     onChange(suggestion);
     setFilteredSuggestions([]);
